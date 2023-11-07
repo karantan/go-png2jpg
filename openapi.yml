@@ -1,0 +1,54 @@
+---
+#
+# OpenAPI3 specs and docs:
+# - https://spec.openapis.org/oas/v3.1.0
+# - https://swagger.io/docs/specification
+#
+openapi: "3.0.0"
+info:
+  description: "A simple and efficient web API written in Go that converts PNG images
+  to JPG format."
+  title: "png2jpg"
+  version: "1.0.0"
+paths:
+  /convert:
+    post:
+      description: URL to the png file
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+      responses:
+        "200":
+          description: jpeg file
+          content:
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/Request'
+        "400":
+          description: Bad Request
+        "408":
+          description: Request Timeout
+        "500":
+          description: Internal Server Error
+        "503":
+          description: Service Unavailable
+
+components:
+  schemas:
+    Request:
+      type: object
+      properties:
+        url:
+          type: string
+          example: https://foo.com/my-image.png
+        image_name:
+          type: string
+          example: my-image.jpg
+      required:
+        - url
+        - image_name
+    Response:
+      type: string
+      format: binary
