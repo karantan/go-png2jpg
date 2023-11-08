@@ -1,4 +1,4 @@
-package main
+package image
 
 import (
 	"bytes"
@@ -19,7 +19,7 @@ func TestToJpeg(t *testing.T) {
 	assert := assert.New(t)
 
 	t.Run("successful decode and encode", func(t *testing.T) {
-		img, _ := os.Open("fixtures/gopher.png")
+		img, _ := os.Open("../fixtures/gopher.png")
 		pngBytes, _ := io.ReadAll(img)
 		m.EXPECT().Decode(bytes.NewReader(pngBytes))
 		buf := new(bytes.Buffer)
@@ -34,7 +34,7 @@ func TestToJpeg(t *testing.T) {
 	})
 
 	t.Run("error decoding", func(t *testing.T) {
-		img, _ := os.Open("fixtures/gopher.png")
+		img, _ := os.Open("../fixtures/gopher.png")
 		pngBytes, _ := io.ReadAll(img)
 		m.EXPECT().Decode(bytes.NewReader(pngBytes)).Return(nil, fmt.Errorf("unable to decode"))
 		_, err := ToJpeg(m, pngBytes)
@@ -42,7 +42,7 @@ func TestToJpeg(t *testing.T) {
 	})
 
 	t.Run("error encoding", func(t *testing.T) {
-		img, _ := os.Open("fixtures/gopher.png")
+		img, _ := os.Open("../fixtures/gopher.png")
 		pngBytes, _ := io.ReadAll(img)
 		m.EXPECT().Decode(bytes.NewReader(pngBytes))
 		buf := new(bytes.Buffer)

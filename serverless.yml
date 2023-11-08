@@ -1,0 +1,20 @@
+service: png2jpg
+frameworkVersion: '3'
+provider:
+  name: aws
+  runtime: go1.x
+  region: us-east-1
+  architecture: x86_64
+
+package:
+  patterns:
+    - '!./**'
+    - ./bin/**
+
+functions:
+  convert:
+    handler: bin/convert
+    events:
+      - httpApi:
+          path: /convert
+          method: post

@@ -3,6 +3,7 @@ module png2jpg
 go 1.21.3
 
 require (
+	github.com/aws/aws-lambda-go v1.41.0
 	github.com/gin-gonic/gin v1.9.1
 	go.uber.org/mock v0.3.0
 )
