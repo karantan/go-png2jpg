@@ -52,13 +52,15 @@ func Handler(request events.APIGatewayProxyRequest) (Response, error) {
 	}
 
 	b64img := base64.StdEncoding.EncodeToString(jpegContent)
+	headers := map[string]string{
+		"Content-Type":        "image/jpeg",
+		"Content-Length":      fmt.Sprintf("%d", len(b64img)),
+		"Content-Disposition": fmt.Sprintf("attachment; filename=\"%s\"", body.ImageName),
+	}
 
 	return Response{
-		StatusCode: http.StatusOK,
-		Headers: map[string]string{
-			"Content-Type":   "image/jpeg",
-			"Content-Length": fmt.Sprintf("%d", len(b64img)),
-		},
+		StatusCode:      http.StatusOK,
+		Headers:         headers,
 		Body:            b64img,
 		IsBase64Encoded: true,
 	}, nil
