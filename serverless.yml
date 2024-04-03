@@ -2,7 +2,8 @@ service: png2jpg
 frameworkVersion: '3'
 provider:
   name: aws
-  runtime: go1.x
+  runtime: provided.al2023
+  stage: v1
   region: us-east-1
   architecture: x86_64
 
