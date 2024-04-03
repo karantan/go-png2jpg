@@ -2,7 +2,7 @@ service: png2jpg
 frameworkVersion: '3'
 provider:
   name: aws
-  runtime: provided.al2023
+  runtime: provided.al2
   stage: v1
   region: us-east-1
   architecture: x86_64
@@ -10,11 +10,11 @@ provider:
 package:
   patterns:
     - '!./**'
-    - ./bin/**
+    - bootstrap
 
 functions:
   convert:
-    handler: bin/convert
+    handler: bootstrap
     events:
       - httpApi:
           path: /convert
